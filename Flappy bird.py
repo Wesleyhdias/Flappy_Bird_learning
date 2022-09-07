@@ -63,7 +63,8 @@ while True:
         colide = py.sprite.spritecollide(bird, wall_sprites, False, py.sprite.collide_mask)
         
         all_sprites.draw(tela)
-        if colide:
+        if colide or bird.y_img > altura - 210:
+            tela.blit(text, (65, 315))
             pass
         elif not start:
             pass

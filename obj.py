@@ -17,13 +17,14 @@ class Bird(py.sprite.Sprite):
         self.corre = 0
         self.pula = False
         self.angulo = 0
+        self.reducao = 0.70
         
         self.bird_sheet = py.image.load(self.dir_img).convert_alpha()
-        self.bird_sheet = py.transform.scale(self.bird_sheet, (0.70*self.bird_sheet.get_width(), 0.70*self.bird_sheet.get_height()))
+        self.bird_sheet = py.transform.scale(self.bird_sheet, (self.reducao*self.bird_sheet.get_width(), self.reducao*self.bird_sheet.get_height()))
         
         self.sprite_list = []
         for c in range(3):
-            img = self.bird_sheet.subsurface((c*(0.70*86), 0), (0.70*86, 0.70*64))
+            img = self.bird_sheet.subsurface((c*(self.reducao*86), 0), (self.reducao*86, self.reducao*64))
             self.sprite_list.append(img)
         
         self.n_sprite = 0
@@ -35,14 +36,15 @@ class Bird(py.sprite.Sprite):
         
     def jump(self):
         self.pula = True
+        self.corre = 0
     
     
     def update(self):
-        self.n_sprite += 0.15
+        self.n_sprite += 0.17
             
-        if self.y_img > altura - 190:
+        if self.y_img > altura - 210:
             self.corremais = 0
-            self.y_img = altura - 190
+            self.y_img = altura - 210
             
         if self.n_sprite >= 3:
             self.n_sprite = 0
@@ -50,15 +52,16 @@ class Bird(py.sprite.Sprite):
         if self.pula:
             self.corremais = -6
             self.pula = False
-        a = 180
         
         self.corremais += 0.30
         self.y_img += self.corremais
         self.image = self.sprite_list[int(self.n_sprite)]
         if self.corremais > 0 and self.angulo > -35:
-            self.angulo -= 2
-        elif self.corremais < 0 and self.angulo < 35:
-            self.angulo += 5
+            self.angulo -= self.corre
+            self.n_sprite = 0.5
+            self.corre += 0.15
+        elif self.corremais < 0 and self.angulo < 30:
+            self.angulo += 4.5
         self.image = py.transform.rotate(self.image, self.angulo)
         py.mask.Mask.clear(self.mask)
         self.mask = py.mask.from_surface(self.image)
