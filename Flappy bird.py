@@ -64,7 +64,6 @@ while True:
         
         all_sprites.draw(tela)
         if colide or bird.y_img > altura - 210:
-            tela.blit(text, (65, 315))
             pass
         elif not start:
             pass
