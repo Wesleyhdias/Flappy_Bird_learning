@@ -1,2 +1,1 @@
-if 8414.61 < 1718.1221:
-    print('sim')
+# lugar para testar mudanças no programa principal sem fazer merda!!
