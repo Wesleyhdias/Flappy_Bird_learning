@@ -8,7 +8,7 @@ from sys import exit
 py.init()
 
 color = {'Blue': (0, 0, 255), 'Red': (255, 0, 0), 'Green': (0, 255, 0),
-        'White': (255, 255, 255), 'Gray': (100, 100, 100)}
+        'White': (255, 255, 255), 'Gray': (100, 100, 100), 'Black': (0, 0, 0)}
 
 defalt_dir = os.path.dirname(__file__)
 img_dir = os.path.join(defalt_dir, "img")
@@ -17,11 +17,16 @@ largura, altura = 500, 800
 tela = py.display.set_mode((largura, altura))
 py.display.set_caption('Flappy Bird')
 fps = py.time.Clock()
+font = py.font.SysFont('arial', 30, True, False)
+font1 = py.font.SysFont('arial', 80, True, False)
 
 while True:
     start = False
     restart = True
     play = True
+    
+    txt = font.render('Press \'R\' to Restart', True, color['Black'])
+    txt1 = font1.render('Game Over!', True, color['Black'])
 
     all_sprites = py.sprite.Group()
     wall_sprites = py.sprite.Group()
@@ -73,6 +78,8 @@ while True:
         elif not start:
             pass
         elif colide or bird.y_img > altura - 210:
+            tela.blit(txt, (125, 355))
+            tela.blit(txt1, (35, 280))
             pass 
         else:
             all_sprites.update()
