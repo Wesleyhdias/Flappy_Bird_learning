@@ -121,7 +121,7 @@ class Pipe(py.sprite.Sprite):
             self.rect.topleft = self.x_img, self.y_img
             
         if self.x_img <= -self.image.get_width():
-            self.x_img = 640
+            self.x_img = 641
 
 
 def pipeys():
@@ -130,3 +130,10 @@ def pipeys():
     ys = (y_a, y_b)
     
     return ys
+
+
+def text(txt, tam, cor, font='arial', bold=False, italic=False):
+    fonte = py.font.SysFont(font, tam, bold, italic)
+    texto = f'{txt}'
+    msg = fonte.render(texto, True, cor)
+    return msg

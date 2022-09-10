@@ -17,16 +17,16 @@ largura, altura = 500, 800
 tela = py.display.set_mode((largura, altura))
 py.display.set_caption('Flappy Bird')
 fps = py.time.Clock()
-font = py.font.SysFont('arial', 30, True, False)
-font1 = py.font.SysFont('arial', 80, True, False)
+pontos = 0
+
+sub_end_txt = obj.text('Press \'R\' to Restart', 30, color['Black'], bold=True, italic=True)
+end_txt = obj.text('Game Over', 80, color['Black'], bold=True)
 
 while True:
     start = False
     restart = True
     play = True
-    
-    txt = font.render('Press \'R\' to Restart', True, color['Black'])
-    txt1 = font1.render('Game Over!', True, color['Black'])
+    pontos = 0
 
     all_sprites = py.sprite.Group()
     wall_sprites = py.sprite.Group()
@@ -54,6 +54,7 @@ while True:
 
     while play:
         
+        score = obj.text(f'PONTOS:{pontos}', 35, color['White'], bold=True)
         tela.fill(color['Gray'])
         fps.tick(60)
         
@@ -78,11 +79,13 @@ while True:
         elif not start:
             pass
         elif colide or bird.y_img > altura - 210:
-            tela.blit(txt, (125, 355))
-            tela.blit(txt1, (35, 280))
+            tela.blit(sub_end_txt, (125, 355))
+            tela.blit(end_txt, (35, 280))
             pass 
         else:
-            all_sprites.update()
+            all_sprites.update()        
+            
+        tela.blit(score, (15, 25))
         
         if pipe.x_img <= -84:
             ys = obj.pipeys()
