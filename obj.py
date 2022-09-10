@@ -121,7 +121,7 @@ class Pipe(py.sprite.Sprite):
             self.rect.topleft = self.x_img, self.y_img
             
         if self.x_img <= -self.image.get_width():
-            self.x_img = 641
+            self.x_img = 639
 
 
 def pipeys():
