@@ -19,8 +19,8 @@ py.display.set_caption('Flappy Bird')
 fps = py.time.Clock()
 pontos = 0
 
-sub_end_txt = obj.text('Press \'R\' to Restart', 30, color['Black'], bold=True, italic=True)
-end_txt = obj.text('Game Over', 80, color['Black'], bold=True)
+sub_end_txt = obj.Text('Press \'R\' to Restart', 30, color['Black'], bold=True, italic=True)
+end_txt = obj.Text('Game Over', 80, color['Black'], bold=True)
 
 while True:
     start = False
@@ -54,10 +54,13 @@ while True:
 
     bird = obj.Bird(bird_sheet, 200, 300)
     all_sprites.add(bird)
+    
+    sub_end_txt.escreve_txt(125, 750, tela)
+    end_txt.escreve_txt(35, 820, tela)
 
     while play:
         
-        score = obj.text(f'PONTOS:{pontos}', 35, color['White'], bold=True)
+        score = obj.Text(f'PONTOS:{pontos}', 35, color['White'], bold=True)
         tela.fill(color['Gray'])
         fps.tick(60)
         
@@ -82,13 +85,12 @@ while True:
         elif not start:
             pass
         elif colide or bird.y_img > altura - 210:
-            tela.blit(sub_end_txt, (125, 355))
-            tela.blit(end_txt, (35, 280))
-            pass 
+            end_txt.anima_txt_y(35, 280, 25)
+            sub_end_txt.anima_txt_y(125, 350, 20)
         else:
             all_sprites.update()        
             
-        tela.blit(score, (15, 25))
+        score.escreve_txt(15, 25, tela)
         
         if (pipes[0].x_img - bird.x_img) < 5 and pipe1 == False:
             pontos += 1

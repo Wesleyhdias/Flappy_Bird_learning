@@ -133,8 +133,32 @@ def pipeys():
     return ys
 
 
-def text(txt, tam, cor, font='arial', bold=False, italic=False):
-    fonte = py.font.SysFont(font, tam, bold, italic)
-    msg = fonte.render(txt, True, cor)
+class Text():
+    def __init__(self,txt, tam, cor, font='arial', bold=False, italic=False):
+        self.txt = txt
+        self.tam = tam
+        self.cor = cor
+        self.font = font
+        self.bold = bold
+        self.italic = italic
+        
+        
+    def escreve_txt(self, x, y, tela):
+        self.x = x
+        self.y = y
+        self.tela = tela
+        
+        self.fonte = py.font.SysFont(self.font, self.tam, self.bold, self.italic)
+        self.msg = self.fonte.render(self.txt, True, self.cor)
+
+        tela.blit(self.msg, (x, y))
     
-    return msg
+    
+    def anima_txt_y(self, xf, yf, speed):
+        self.xf = xf
+        self.yf = yf
+        if self.y > yf: 
+            self.y -= speed
+        else: 
+            self.y = yf
+        self.escreve_txt(self.x, self.y, self.tela)
