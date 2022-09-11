@@ -159,11 +159,19 @@ class Text():
         self.yf = yf
         if self.y > yf: 
             self.y -= speed
-        else: 
-            self.y = yf
+            if self.y - yf < 5:
+                self.y = yf
+        elif self.y < yf:
+            self.y += speed 
+            if self.y - yf > -5:
+                self.y = yf
             
-        if self.x < xf: 
-            self.x += speed
-        else: 
-            self.x = xf
+        if self.x > xf: 
+            self.x -= speed
+            if self.x - xf < 5:
+                self.x = xf
+        elif self.x < xf:
+            self.x += speed 
+            if self.x - xf > -5:
+                self.x = xf
         self.escreve_txt(self.x, self.y, self.tela)

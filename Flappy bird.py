@@ -34,7 +34,7 @@ while True:
     wall_sprites = py.sprite.Group()
 
     for c in range(2):
-        bg = obj.Bg(os.path.join(img_dir, 'bg.png'), c, 1000, 1)
+        bg = obj.Bg(os.path.join(img_dir, 'bg.png'), c, 1000)
         all_sprites.add(bg)
 
     for c in range(3):
@@ -55,8 +55,8 @@ while True:
     bird = obj.Bird(bird_sheet, 200, 300)
     all_sprites.add(bird)
     
-    sub_end_txt.escreve_txt(-275, 350, tela)
-    end_txt.escreve_txt(-365, 280, tela)
+    sub_end_txt.escreve_txt(-275, 360, tela)
+    end_txt.escreve_txt(650, 280, tela)
 
     while play:
         
@@ -85,8 +85,8 @@ while True:
         elif not start:
             pass
         elif colide or bird.y_img > altura - 210:
-            end_txt.anima_txt_y(35, 280, 30)
-            sub_end_txt.anima_txt_y(125, 350, 30)
+            end_txt.anima_txt_y(35, 280, 35)
+            sub_end_txt.anima_txt_y(125, 360, 30)
         else:
             all_sprites.update()        
             
