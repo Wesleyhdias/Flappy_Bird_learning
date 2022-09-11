@@ -60,7 +60,7 @@ while True:
 
     while play:
         
-        score = obj.Text(f'PONTOS:{pontos}', 35, color['White'], bold=True)
+        score = obj.Text(f'PONTOS:{pontos}', 40, color['White'], bold=True, font='consolas')
         tela.fill(color['Gray'])
         fps.tick(60)
         
