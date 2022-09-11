@@ -55,8 +55,8 @@ while True:
     bird = obj.Bird(bird_sheet, 200, 300)
     all_sprites.add(bird)
     
-    sub_end_txt.escreve_txt(125, 750, tela)
-    end_txt.escreve_txt(35, 820, tela)
+    sub_end_txt.escreve_txt(-275, 350, tela)
+    end_txt.escreve_txt(-365, 280, tela)
 
     while play:
         
@@ -85,8 +85,8 @@ while True:
         elif not start:
             pass
         elif colide or bird.y_img > altura - 210:
-            end_txt.anima_txt_y(35, 280, 25)
-            sub_end_txt.anima_txt_y(125, 350, 20)
+            end_txt.anima_txt_y(35, 280, 30)
+            sub_end_txt.anima_txt_y(125, 350, 30)
         else:
             all_sprites.update()        
             

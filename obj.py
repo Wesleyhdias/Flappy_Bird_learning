@@ -161,4 +161,9 @@ class Text():
             self.y -= speed
         else: 
             self.y = yf
+            
+        if self.x < xf: 
+            self.x += speed
+        else: 
+            self.x = xf
         self.escreve_txt(self.x, self.y, self.tela)
