@@ -40,7 +40,7 @@ class Bird(py.sprite.Sprite):
     
     
     def update(self):
-        self.n_sprite += 0.17
+        self.n_sprite += 0.15
             
         if self.y_img > altura - 210:
             self.corremais = 0
@@ -56,12 +56,14 @@ class Bird(py.sprite.Sprite):
         self.corremais += 0.30
         self.y_img += self.corremais
         self.image = self.sprite_list[int(self.n_sprite)]
+        
         if self.corremais > 0 and self.angulo > -35:
             self.angulo -= self.corre
             self.n_sprite = 0.5
             self.corre += 0.15
         elif self.corremais < 0 and self.angulo < 30:
             self.angulo += 4.5
+            
         self.image = py.transform.rotate(self.image, self.angulo)
         py.mask.Mask.clear(self.mask)
         self.mask = py.mask.from_surface(self.image)
@@ -77,7 +79,6 @@ class Bg(py.sprite.Sprite):
         self.x_img = x_img*self.image.get_width()
         self.y_img = 800 - y_img
         self.speed = speed
-        
         
         self.rect = self.image.get_rect()
         self.rect.topleft = self.x_img, self.y_img
@@ -134,6 +135,6 @@ def pipeys():
 
 def text(txt, tam, cor, font='arial', bold=False, italic=False):
     fonte = py.font.SysFont(font, tam, bold, italic)
-    texto = f'{txt}'
-    msg = fonte.render(texto, True, cor)
+    msg = fonte.render(txt, True, cor)
+    
     return msg
