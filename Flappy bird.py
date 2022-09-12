@@ -17,7 +17,6 @@ largura, altura = 500, 800
 tela = py.display.set_mode((largura, altura))
 py.display.set_caption('Flappy Bird')
 fps = py.time.Clock()
-pontos = 0
 
 sub_end_txt = obj.Text('Press \'R\' to Restart', 30, color['Black'], bold=True, italic=True)
 end_txt = obj.Text('Game Over', 80, color['Black'], bold=True)
