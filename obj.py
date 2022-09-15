@@ -149,12 +149,12 @@ class Text():
         self.tela = tela
         
         self.fonte = py.font.SysFont(self.font, self.tam, self.bold, self.italic)
-        self.msg = self.fonte.render(self.txt, True, self.cor)
+        self.msg = self.fonte.render(self.txt, False, self.cor)
 
         tela.blit(self.msg, (x, y))
     
     
-    def anima_txt_y(self, xf, yf, speed):
+    def anima_txt(self, xf, yf, speed):
         self.xf = xf
         self.yf = yf
         if self.y > yf: 
@@ -174,4 +174,8 @@ class Text():
             self.x += speed 
             if self.x - xf > -5:
                 self.x = xf
+        self.escreve_txt(self.x, self.y, self.tela)
+        
+        
+    def rescreve(self):
         self.escreve_txt(self.x, self.y, self.tela)

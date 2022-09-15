@@ -26,10 +26,11 @@ toc2 = py.mixer.Sound(som2)
 
 sub_end_txt = obj.Text('Press \'R\' to Restart', 30, color['Black'], bold=True, italic=True)
 end_txt = obj.Text('Game Over', 80, color['Black'], bold=True)
+score = obj.Text(f'PONTOS:', 40, color['Black'], bold=True, font='consolas')
 
 while True:
-    restart = play = toca = True
     pontos = 0
+    restart = play = toca = True
     pipe1 = pipe2 = pipe3 = start = False
     pipes = []
 
@@ -60,10 +61,12 @@ while True:
     
     sub_end_txt.escreve_txt(-275, 360, tela)
     end_txt.escreve_txt(650, 280, tela)
+    
+    score.escreve_txt(15, 25, tela)
 
     while play:
         
-        score = obj.Text(f'PONTOS:{pontos}', 40, color['White'], bold=True, font='consolas')
+        score.txt = f'PONTOS:{pontos}'
         fps.tick(60)
         
         for event in py.event.get():
@@ -99,12 +102,13 @@ while True:
                 py.display.flip()
                 sleep(0.7)
             else:
-                end_txt.anima_txt_y(35, 280, 30)
-                sub_end_txt.anima_txt_y(125, 360, 25)
+                end_txt.anima_txt(35, 280, 30)
+                sub_end_txt.anima_txt(125, 360, 25)
+                score.anima_txt(190, 220, 3)
         else:
             all_sprites.update()        
             
-        score.escreve_txt(15, 25, tela)
+        score.rescreve()
         
         if (pipes[0].x_img - bird.x_img) < 5 and pipe1 == False:
             pontos += 1
