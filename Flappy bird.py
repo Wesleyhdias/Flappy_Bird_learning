@@ -1,7 +1,7 @@
 import pygame as py
 import obj
 import os
-from random import randint
+from time import sleep
 from pygame.locals import * 
 from sys import exit
 
@@ -12,22 +12,26 @@ color = {'Blue': (0, 0, 255), 'Red': (255, 0, 0), 'Green': (0, 255, 0),
 
 defalt_dir = os.path.dirname(__file__)
 img_dir = os.path.join(defalt_dir, "img")
+sons_dir = os.path.join(defalt_dir, "sons")
 bird_sheet = os.path.join(img_dir, 'bird.png')
+som1 = os.path.join(sons_dir, "Punch_03.wav")
+som2 = os.path.join(sons_dir, "Wrenched.wav")
 largura, altura = 500, 800
 tela = py.display.set_mode((largura, altura))
 py.display.set_caption('Flappy Bird')
 fps = py.time.Clock()
 pontos = 0
 
+toc1 = py.mixer.Sound(som1)
+toc2 = py.mixer.Sound(som2)
+
 sub_end_txt = obj.Text('Press \'R\' to Restart', 30, color['Black'], bold=True, italic=True)
 end_txt = obj.Text('Game Over', 80, color['Black'], bold=True)
 
 while True:
-    start = False
-    restart = True
-    play = True
+    restart = play = toca = True
     pontos = 0
-    pipe1 = pipe2 = pipe3 = False
+    pipe1 = pipe2 = pipe3 = start = False
     pipes = []
 
     all_sprites = py.sprite.Group()
@@ -61,7 +65,6 @@ while True:
     while play:
         
         score = obj.Text(f'PONTOS:{pontos}', 40, color['White'], bold=True, font='consolas')
-        tela.fill(color['Gray'])
         fps.tick(60)
         
         for event in py.event.get():
@@ -72,6 +75,7 @@ while True:
                 start = True
                 if event.key == K_SPACE:
                     bird.jump()
+                    toc1.play()
                 if event.key == K_r:
                     play = False
                 if event.key == K_ESCAPE:
@@ -79,14 +83,25 @@ while True:
 
         colide = py.sprite.spritecollide(bird, wall_sprites, False, py.sprite.collide_mask)
         
-        all_sprites.draw(tela)
+        if toca:
+            tela.fill(color['Gray'])
+            all_sprites.draw(tela)
+        else:
+            tela.fill(color['White'])
         if not restart:
             break
         elif not start:
             pass
         elif colide or bird.y_img > altura - 210:
-            end_txt.anima_txt_y(35, 280, 35)
-            sub_end_txt.anima_txt_y(125, 360, 30)
+            if toca:
+                toc2.play()
+                toca = False
+                tela.fill(color['White'])
+                py.display.flip()
+                sleep(0.7)
+            else:
+                end_txt.anima_txt_y(35, 280, 30)
+                sub_end_txt.anima_txt_y(125, 360, 25)
         else:
             all_sprites.update()        
             
