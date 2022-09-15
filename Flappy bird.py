@@ -20,7 +20,6 @@ largura, altura = 500, 800
 tela = py.display.set_mode((largura, altura))
 py.display.set_caption('Flappy Bird')
 fps = py.time.Clock()
-pontos = 0
 
 toc1 = py.mixer.Sound(som1)
 toc2 = py.mixer.Sound(som2)
