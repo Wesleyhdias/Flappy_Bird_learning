@@ -85,11 +85,10 @@ while True:
 
         colide = py.sprite.spritecollide(bird, wall_sprites, False, py.sprite.collide_mask)
         
-        if toca:
-            tela.fill(color['Gray'])
-            all_sprites.draw(tela)
-        else:
-            tela.fill(color['White'])
+
+        tela.fill(color['Gray'])
+        all_sprites.draw(tela)
+
         if not restart:
             break
         elif not start:
@@ -104,7 +103,7 @@ while True:
             else:
                 end_txt.anima_txt(35, 280, 30)
                 sub_end_txt.anima_txt(125, 360, 25)
-                score.anima_txt(175, 235, 3)
+                score.anima_txt(170, 250, 3)
         else:
             all_sprites.update()  
         
