@@ -104,30 +104,30 @@ while True:
             else:
                 end_txt.anima_txt(35, 280, 30)
                 sub_end_txt.anima_txt(125, 360, 25)
-                score.anima_txt(190, 220, 3)
+                score.anima_txt(175, 235, 3)
         else:
-            all_sprites.update()        
+            all_sprites.update()  
+        
+            if (pipes[0].x_img - bird.x_img) < 5 and pipe1 == False:
+                pontos += 1
+                pipe1 = True
+                pipe2 = False
+            elif (pipes[1].x_img - bird.x_img) < 5 and pipe2 == False:
+                pontos += 1
+                pipe2 = True
+                pipe3 = False
+            elif (pipes[2].x_img - bird.x_img) < 5 and pipe3 == False:
+                pontos += 1
+                pipe3 = True
+                pipe1 = False
             
+            if down_pipe.x_img <= -84:
+                ys = obj.pipeys()
+                down_pipe.y_img = ys[0]
+                up_pipe.y_img = ys[1]
+                
         score.rescreve()
         
-        if (pipes[0].x_img - bird.x_img) < 5 and pipe1 == False:
-            pontos += 1
-            pipe1 = True
-            pipe2 = False
-        elif (pipes[1].x_img - bird.x_img) < 5 and pipe2 == False:
-            pontos += 1
-            pipe2 = True
-            pipe3 = False
-        elif (pipes[2].x_img - bird.x_img) < 5 and pipe3 == False:
-            pontos += 1
-            pipe3 = True
-            pipe1 = False
-        
-        if down_pipe.x_img <= -84:
-            ys = obj.pipeys()
-            down_pipe.y_img = ys[0]
-            up_pipe.y_img = ys[1]
-
         py.display.flip()
     
     if not restart:
