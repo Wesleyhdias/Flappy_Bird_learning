@@ -21,8 +21,8 @@ tela = py.display.set_mode((largura, altura))
 py.display.set_caption('Flappy Bird')
 fps = py.time.Clock()
 
-toc1 = py.mixer.Sound(som1)
-toc2 = py.mixer.Sound(som2)
+jump = py.mixer.Sound(som1)
+hit = py.mixer.Sound(som2)
 
 sub_end_txt = obj.Text('Press \'R\' to Restart', 30, color['Black'], bold=True, italic=True)
 end_txt = obj.Text('Game Over', 80, color['Black'], bold=True)
@@ -69,22 +69,21 @@ while True:
         score.txt = f'PONTOS:{pontos}'
         fps.tick(60)
         
+        colide = py.sprite.spritecollide(bird, wall_sprites, False, py.sprite.collide_mask)
+        
         for event in py.event.get():
             if event.type == QUIT:
                 py.quit()
                 exit()
             if event.type == KEYDOWN:
                 start = True
-                if event.key == K_SPACE:
+                if event.key == K_SPACE and not colide:
                     bird.jump()
-                    toc1.play()
+                    jump.play()
                 if event.key == K_r:
                     play = False
                 if event.key == K_ESCAPE:
                     restart = False
-
-        colide = py.sprite.spritecollide(bird, wall_sprites, False, py.sprite.collide_mask)
-        
 
         tela.fill(color['Gray'])
         all_sprites.draw(tela)
@@ -95,7 +94,7 @@ while True:
             pass
         elif colide or bird.y_img > altura - 210:
             if toca:
-                toc2.play()
+                hit.play()
                 toca = False
                 tela.fill(color['White'])
                 py.display.flip()
