@@ -33,9 +33,10 @@ while True:
     restart = play = toca = True
     pipe1 = pipe2 = pipe3 = start = False
     pipes = []
+    other_pipes = []
 
     all_sprites = py.sprite.Group()
-    wall_sprites = py.sprite.Group()
+    wall_sprites = py.sprite.Group() 
 
     for c in range(2):
         bg = obj.Bg(os.path.join(img_dir, 'bg.png'), c, 1000)
@@ -51,6 +52,7 @@ while True:
         wall_sprites.add(down_pipe)
         wall_sprites.add(up_pipe)
         pipes.append(up_pipe)
+        other_pipes.append(down_pipe)
     
     for c in range(2):
         piso = obj.Bg(os.path.join(img_dir, 'base.png'), c, 150, 3)
@@ -68,7 +70,7 @@ while True:
         
         score.txt = f'PONTOS:{pontos}'
         fps.tick(60)
-        
+
         colide = py.sprite.spritecollide(bird, wall_sprites, False, py.sprite.collide_mask)
         
         for event in py.event.get():
@@ -125,7 +127,6 @@ while True:
                 up_pipe.y_img = ys[1]
                 
         score.rescreve()
-        
         py.display.flip()
     
     if not restart:
